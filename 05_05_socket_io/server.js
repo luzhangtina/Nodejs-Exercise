@@ -10,7 +10,6 @@ app.use(express.static(__dirname))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-
 var oldMessages = [
     {
         name: 'Tina',
@@ -34,6 +33,10 @@ app.post('/messages', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user is connected')
+})
+
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+    console.log('mongo DB is connnected', err)
 })
 
 var server = http.listen(3000, () => {
