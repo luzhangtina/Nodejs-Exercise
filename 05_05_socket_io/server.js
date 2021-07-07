@@ -21,17 +21,16 @@ app.get('/messages', (req, res) => {
     })
 })
 
-app.post('/messages', (req, res) => {
-    var message = new Message(req.body)
-    message.save((err) => {
-        if (err) {
-            res.sendStatus(500)
-        }
-
+app.post('/messages', async (req, res) => {
+    var message = new Message(req.body);
+    try {
+        var result = await message.save()
         io.emit('message', req.body)
         res.sendStatus(200)
-    })
-   
+    } catch(err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
 }) 
 
 io.on('connection', (socket) => {
