@@ -65,3 +65,5 @@ npm install -D nodemon
 ```
     "dev": "nodemon server.js"
 ```
+
+12. Install EJS plugin in VS code
