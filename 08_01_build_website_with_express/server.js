@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 
-const routes = require('./routes');
+const routes = require('./routes/index');
 
 const app = express();
 
@@ -11,6 +11,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 
 app.use(express.static(path.join(__dirname, './static')));
+
+// Mount routing sub module to application
 app.use('/', routes());
 
 const server = app.listen(port, () => {
