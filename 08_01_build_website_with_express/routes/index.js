@@ -9,7 +9,6 @@ module.exports = (params) => {
   const { speakersService } = params;
   router.get('/', async (request, response) => {
     const topSpeakers = await speakersService.getList();
-    console.log(topSpeakers);
     response.render('layout/index', { pageTitle: 'Welcome', template: 'index', topSpeakers });
   });
 
