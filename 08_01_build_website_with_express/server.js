@@ -27,7 +27,19 @@ app.use(
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 
+app.locals.siteName = 'ROUX Meetups';
+
 app.use(express.static(path.join(__dirname, './static')));
+app.use(async (_req, res, next) => {
+  try {
+    const names = await speakersService.getNames();
+    res.locals.speakerNames = names;
+    console.log(res.locals);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
 
 // Mount routing sub module to application
 app.use(
